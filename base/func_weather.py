@@ -47,6 +47,7 @@ class Weather(object):
         return city_id, district_name, city_name, province_name, country_name, lat, lon
 
     def getWeatherByCity(self, city_input):
+        msg=''
         city_idname = self.get_city(city_input)
         city_id = city_idname[0]
 
@@ -58,23 +59,21 @@ class Weather(object):
 
         #print(json.dumps(get_now, sort_keys=True, indent=4))
         if city_idname[2] == city_idname[1]:
-            print(city_idname[3], str(city_idname[2]) + '市')
+            msg=msg+city_idname[3], str(city_idname[2]) + '市' + "\n"
         else:
-            print(city_idname[3], str(city_idname[2]) + '市', str(city_idname[1]) + '区')
-        print('当前天气：', get_now['now']['text'], get_now['now']['temp'], '°C', '体感温度', get_now['now']['feelsLike'], '°C')
-        print('空气质量指数：', air_now['aqi'])
+            msg=msg+city_idname[3], str(city_idname[2]) + '市', str(city_idname[1]) + '区' + "\n"
+        msg=msg+'当前天气：', get_now['now']['text'], get_now['now']['temp'], '°C', '体感温度', get_now['now']['feelsLike'], '°C' + "\n"
+        msg=msg+'空气质量指数：', air_now['aqi'] + "\n"
         #print('降水情况：', get_rain)
-        print('今日天气：', get_daily['daily'][0]['textDay'], get_daily['daily'][0]['tempMin'], '-', get_daily['daily'][0]['tempMax'], '°C')
+        msg=msg+'今日天气：', get_daily['daily'][0]['textDay'], get_daily['daily'][0]['tempMin'], '-', get_daily['daily'][0]['tempMax'], '°C'+"\n"
 
-        nHoursLater = 1 # future weather hourly
-        print(nHoursLater, '小时后天气：', get_hourly['hourly'][1]['text'], get_hourly['hourly'][1]['temp'], '°C')
+        # nHoursLater = 1 # future weather hourly
+        # print(nHoursLater, '小时后天气：', get_hourly['hourly'][1]['text'], get_hourly['hourly'][1]['temp'], '°C')
 
         nDaysLater = 1 # future weather daily
-        print('明天天气：', get_daily['daily'][nDaysLater]['textDay'], get_daily['daily'][nDaysLater]['tempMin'], '-', get_daily['daily'][nDaysLater]['tempMax'], '°C')
-        return
+        msg=msg+'明天天气：', get_daily['daily'][nDaysLater]['textDay'], get_daily['daily'][nDaysLater]['tempMin'], '-', get_daily['daily'][nDaysLater]['tempMax'], '°C'+"\n"
+        return msg
 
 if __name__ == '__main__':
     qweather = Weather()
-    qweather.getWeatherByCity('上海')
-    qweather.getWeatherByCity('诸暨市')
-    
+    print(qweather.getWeatherByCity('上海'))    

@@ -65,6 +65,7 @@ class Weather(object):
         msg=msg+'当前天气：'+ get_now['now']['text']+ get_now['now']['temp']+ '°C'+ '体感温度'+ get_now['now']['feelsLike']+ '°C' + "\n"
         msg=msg+'空气质量指数：'+ air_now['aqi'] + "\n"
         #print('降水情况：', get_rain)
+        
         msg=msg+'今日天气：'+ get_daily['daily'][0]['textDay']+ get_daily['daily'][0]['tempMin']+ '-'+ get_daily['daily'][0]['tempMax']+ '°C'+"\n"
 
         # nHoursLater = 1 # future weather hourly

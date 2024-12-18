@@ -15,6 +15,7 @@ from base.func_chatglm import ChatGLM
 from base.func_chatgpt import ChatGPT
 from base.func_chengyu import cy
 from base.func_news import News
+from base.func_weather import Weather
 from base.func_tigerbot import TigerBot
 from base.func_xinghuo_web import XinghuoWeb
 from configuration import Config
@@ -263,3 +264,12 @@ class Robot(Job):
         news = News().get_important_news()
         for r in receivers:
             self.sendTextMsg(news, r)
+
+    def weatherReport(self) -> None:
+        receivers = self.config.NEWS #与新闻接受人一样
+        if not receivers:
+            return
+
+        weather = Weather().getWeatherByCity('上海')
+        for r in receivers:
+            self.sendTextMsg(weather, r)
